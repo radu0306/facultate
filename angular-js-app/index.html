@@ -35,26 +35,24 @@
 
   <div class="container">
     <div ng-controller="HomeController">
-      <h1>{{ helloWorld }}</h1>
-      <p>Writing this live into the browser...</p>
+      <h1 ng-click="doStuff()">{{ helloWorld }}</h1>
     </div>
   </div>
 
   <hr/>
 
   <!-- /Persoana -->
-  <div class="container">
-    <h1>Person</h1>
-    <h2>List all persons</h2>
+  <div class="container" ng-controller="HomeController">
+    <h1>Persoana</h1>
+    <h2>List all resources</h2>
     <table class="table table-bordered">
       <tr>
-        <th>ID</th>
-        <th>Nume</th>
+        <th ng-repeat="key in keys">{{ key }}</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>John</td>
+      <tr ng-repeat="item in persoane.data" data-id="{{ item.id }}">
+        <td>{{ item.id }}</td>
+        <td>{{ item.nume }}</td>
         <td>
           <a href="">
             <span class="label label-success">
@@ -62,136 +60,79 @@
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
-          <a href="">
-            <span class="label label-primary">
+          <button ng-click="setUpdatePerson(item)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
-            </span>
           </a>
-          <a href="">
-            <span class="label label-danger">
+          <button ng-click="deletePersoana(item.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Paul</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Paul</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+            </button>
           </a>
         </td>
       </tr>
     </table>
 
-    <div class="row">
-      <div class="col-md-3">
-        <h2>Edit a person</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume">
-          </div>
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
-      </div>
+    <h2>Add new person</h2>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="person.id"/></td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td><input type="text" class="form-control" ng-model="person.name"/></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button ng-click="addPersoana(person)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+      </tr>
+    </table>
 
 
-      <div class="col-md-3 col-md-offset-6">
-        <h2>Add a person</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
-      </div>
-    </div>
+    <h2>Edit a person</h2>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editPerson.id"></td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td><input type="text" ng-model="editPerson.nume"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-info btn-xs" ng-click="updatePerson()">
+            Update
+          </button>
+        </td>
+      </tr>
+    </table>
+	 </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <h2>Show a person</h2>
-      </div>
-      <div class="col-md-2">
-        <img src="http://lorempixel.com/200/200/technics/?id=1" class="img-thumbnail"/>
-      </div>
-      <div class="col-md-10">
-        <h1>1</h1>
-        <p>Paul</p>
-      </div>
-    </div>
-  </div>
+	<script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/app.js"></script>
 
-  <hr/>
+	 <hr/>
 
   <!-- /City-->
-  <div class="container">
-    <h1>Oras</h1>
-    <h2>List all cities</h2>
+  <div class="container" ng-controller="OrasController">
+    <h1>Orase</h1>
+    <h2>List all Cities</h2>
     <table class="table table-bordered">
       <tr>
-        <th>ID</th>
-        <th>Nume</th>
-		<th>Judet</th>
-        <th>Nr Loc</th>
+        <th ng-repeat="key in keys">{{ key }}</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>Pitesti</td>
-		<td>Arges</td>
-        <td>100000</td>
+      <tr ng-repeat="or in oras.data" data-id="{{ oras.id }}">
+        <td>{{ or.id }}</td>
+        <td>{{ or.nume }}</td>
+		<td>{{ or.judet }}</td>
+		<td>{{ or.loc }}</td>
+		
         <td>
           <a href="">
             <span class="label label-success">
@@ -199,156 +140,95 @@
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
-          <a href="">
-            <span class="label label-primary">
+          <button ng-click="setUpdateO(or)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
-            </span>
           </a>
-          <a href="">
-            <span class="label label-danger">
+          <button ng-click="deleteOras(or.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Bucuresti</td>
-		<td>Bucuresti</td>
-        <td>1500000</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Mioveni</td>
-		<td>Arges</td>
-        <td>25000</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+            </button>
           </a>
         </td>
       </tr>
     </table>
 
-    <div class="row">
-      <div class="col-md-3">
-        <h2>Edit a City</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Judet</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Judet">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Nr Loc</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nr Loc">
-          </div>
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
-      </div>
+    <h2>Add new Oras</h2>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="o.id"/></td>
+      </tr>
+      <tr>
+        <td>Nume</td>
+        <td><input type="text" class="form-control" ng-model="o.nume"/></td>
+      </tr>
+      <tr>
+	   <td>Judet</td>
+        <td><input type="text" class="form-control" ng-model="o.judet"/></td>
+      </tr>
+      <tr>
+	   <td>Locuitori</td>
+        <td><input type="text" class="form-control" ng-model="o.loc"/></td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <button ng-click="addOras(o)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+      </tr>
+    </table>
 
 
-      <div class="col-md-3 col-md-offset-6">
-        <h2>Add a City</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Judet</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Judet">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Nr Loc</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nr Loc">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <h2>Show a City</h2>
-      </div>
-      <div class="col-md-2">
-        <img src="http://lorempixel.com/200/200/technics/?id=2" class="img-thumbnail"/>
-      </div>
-      <div class="col-md-10">
-        <h1>1</h1>
-        <p>Pitesti, Arges</p>
-      </div>
-    </div>
+    <h2>Edit Oras</h2>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editO.id"></td>
+      </tr>
+      <tr>
+        <td>Nume</td>
+        <td><input type="text" ng-model="editO.nume"></td>
+      </tr>
+      <tr>
+	  <td>Judet</td>
+        <td><input type="text" ng-model="editO.judet"></td>
+      </tr>
+      <tr>
+	  <td>Locuitori</td>
+        <td><input type="text" ng-model="editO.locuitori"></td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <button class="btn btn-info btn-xs" ng-click="updateO()">
+            Update
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
+
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/app.js"></script>
 
   <hr/>
   
     <!-- /Film-->
-  <div class="container">
-    <h1>Movie</h1>
-    <h2>List all movies</h2>
+  <div class="container" ng-controller="FilmController">
+    <h1>Filme</h1>
+    <h2>List all Moovies</h2>
     <table class="table table-bordered">
       <tr>
-        <th>ID</th>
-        <th>Nume</th>
-		<th>Gen</th>
-        <th>Pret</th>
+        <th ng-repeat="key in keys">{{ key }}</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>DieHard</td>
-		<td>actiune</td>
-        <td>25</td>
+      <tr ng-repeat="fi in film.data" data-id="{{ film.id }}">
+        <td>{{ fi.id }}</td>
+        <td>{{ fi.nume }}</td>
+		<td>{{ fi.categorie }}</td>
+		<td>{{ fi.pret }}</td>
+		
         <td>
           <a href="">
             <span class="label label-success">
@@ -356,298 +236,169 @@
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
-          <a href="">
-            <span class="label label-primary">
+          <button ng-click="setUpdateF(fi)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
-            </span>
           </a>
-          <a href="">
-            <span class="label label-danger">
+          <button ng-click="deleteFilm(fi.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>SkyFall</td>
-		<td>actiune</td>
-        <td>40</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Pianistul</td>
-		<td>drama</td>
-        <td>20</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+            </button>
           </a>
         </td>
       </tr>
     </table>
 
-    <div class="row">
-      <div class="col-md-3">
-        <h2>Edit a Movie</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Gen</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Gen">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Pret</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Pret">
-          </div>
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
-      </div>
-
-
-      <div class="col-md-3 col-md-offset-6">
-        <h2>Add a Movie</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Gen</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Gen">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Pret</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Pret">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <h2>Show a Movie</h2>
-      </div>
-      <div class="col-md-2">
-        <img src="http://lorempixel.com/200/200/technics/?id=2" class="img-thumbnail"/>
-      </div>
-      <div class="col-md-10">
-        <h1>1</h1>
-        <p>DieHard, actiune</p>
-      </div>
-    </div>
-  </div>
-  <hr/>
-      <!-- /Product-->
-  <div class="container">
-    <h1>Product</h1>
-    <h2>List all products</h2>
-    <table class="table table-bordered">
+    <h2>Add new Moovie</h2>
+    <table>
       <tr>
-        <th>ID</th>
-        <th>Nume</th>
-		<th>Categorie</th>
-        <th>Stoc</th>
-        <th style="width:210px;">Options</th>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="f.id"/></td>
       </tr>
       <tr>
-        <td>1</td>
-        <td>Mar</td>
-		<td>Fructe</td>
-        <td>true</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
+        <td>Nume</td>
+        <td><input type="text" class="form-control" ng-model="f.nume"/></td>
       </tr>
       <tr>
-        <td>2</td>
-        <td>Ceapa</td>
-		<td>Legume</td>
-        <td>false</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
+	   <td>Categorie</td>
+        <td><input type="text" class="form-control" ng-model="f.categorie"/></td>
       </tr>
       <tr>
-        <td>3</td>
-        <td>Televizor</td>
-		<td>Electronice</td>
-        <td>true</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
+	   <td>Pret</td>
+        <td><input type="text" class="form-control" ng-model="f.pret"/></td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <button ng-click="addFilm(f)" class="btn btn-primary btn-xs">Add</button>
         </td>
       </tr>
     </table>
 
-    <div class="row">
-      <div class="col-md-3">
-        <h2>Edit a Product</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Categorie</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Categorie">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Stoc</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Stoc">
-          </div>
-          <button type="submit" class="btn btn-info">Save</button>
-        </form>
-      </div>
 
-
-      <div class="col-md-3 col-md-offset-6">
-        <h2>Add a Product</h2>
-        <form action="" method="">
-          <div class="form-group">
-            <label for="attribute1">ID</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="ID">
-          </div>
-          <div class="form-group">
-            <label for="attribute2">Nume</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Nume">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Categorie</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Categorie">
-          </div>
-		  <div class="form-group">
-            <label for="attribute2">Stoc</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Stoc">
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <h2>Show a Product</h2>
-      </div>
-      <div class="col-md-2">
-        <img src="http://lorempixel.com/200/200/technics/?id=2" class="img-thumbnail"/>
-      </div>
-      <div class="col-md-10">
-        <h1>1</h1>
-        <p>Mar, Fructe</p>
-      </div>
-    </div>
+    <h2>Edit Moovie</h2>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editF.id"></td>
+      </tr>
+      <tr>
+        <td>Nume</td>
+        <td><input type="text" ng-model="editF.nume"></td>
+      </tr>
+      <tr>
+	  <td>Categorie</td>
+        <td><input type="text" ng-model="editF.categorie"></td>
+      </tr>
+      <tr>
+	  <td>Pret</td>
+        <td><input type="text" ng-model="editF.pret"></td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <button class="btn btn-info btn-xs" ng-click="updateF()">
+            Update
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
+
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/app.js"></script>
+  
   
   <hr/>
-  <div class="container">
-    <footer class="footer">
-      <p class="text-muted pull-left">AWJ Base Project &copy; 2015-2016</p>
-      <p class="text-muted pull-right">Aftene Radu-Stefan, 332AB</p>
-    </footer>
+  
+  
+      <!-- /Product-->
+  <div class="container" ng-controller="ProdusController">
+    <h1>Produs</h1>
+    <h2>List all Products</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="pr in prod.data" data-id="{{ prod.id }}">
+        <td>{{ pr.id }}</td>
+        <td>{{ pr.nume }}</td>
+		<td>{{ pr.categorie }}</td>
+		<td>{{ pr.stoc }}</td>
+		
+        <td>
+          <a href="">
+            <span class="label label-success">
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+          <button ng-click="setUpdateP(pr)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </a>
+          <button ng-click="deleteProd(pr.id)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+
+    <h2>Add new Product</h2>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="p.id"/></td>
+      </tr>
+      <tr>
+        <td>Nume</td>
+        <td><input type="text" class="form-control" ng-model="p.nume"/></td>
+      </tr>
+      <tr>
+	   <td>Categorie</td>
+        <td><input type="text" class="form-control" ng-model="p.categorie"/></td>
+      </tr>
+      <tr>
+	   <td>Stoc</td>
+        <td><input type="text" class="form-control" ng-model="p.stoc"/></td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <button ng-click="addProd(p)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+      </tr>
+    </table>
+
+
+    <h2>Edit Product</h2>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editP.id"></td>
+      </tr>
+      <tr>
+        <td>Nume</td>
+        <td><input type="text" ng-model="editP.nume"></td>
+      </tr>
+      <tr>
+	  <td>Categorie</td>
+        <td><input type="text" ng-model="editP.categorie"></td>
+      </tr>
+      <tr>
+	  <td>Stoc</td>
+        <td><input type="text" ng-model="editP.stoc"></td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <button class="btn btn-info btn-xs" ng-click="updateP()">
+            Update
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
 
   <script src="js/jquery-1.11.3.min.js"></script>

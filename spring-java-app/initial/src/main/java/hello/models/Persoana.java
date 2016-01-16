@@ -4,6 +4,9 @@ public class Persoana {
 
     private  long id;
     private String nume;
+	
+	public Persoana(){}
+	
 	public Persoana(long id, String nume) {
         this.id = id;
         this.nume = nume;

@@ -32,12 +32,7 @@ public class OrasController {
   }
 
 @RequestMapping(value="/oras/{nume}/{judet}/{loc}", method = RequestMethod.POST)
-  public List<Oras> create(@PathVariable("nume") String nume,@PathVariable("judet") String jud,@PathVariable("loc") int loc ) {
-	int contor=1;
-	for(Oras o : this.oras) {
-		contor++;
-	}
-	Oras o = new Oras(contor, nume, jud, loc);
+  public ResponseEntity create(@RequestBody Persoana p) {
 	oras.add(o);
 	
     return this.oras;
