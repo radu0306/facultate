@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -32,15 +33,10 @@ public class ProdusController {
   }
 
 @RequestMapping(value="/produs/{nume}/{categorie}/{stoc}", method = RequestMethod.POST)
-  public List<Produs> create(@PathVariable("nume") String nume,@PathVariable("categorie") String cat,@PathVariable("stoc") Boolean stoc ) {
-	int contor=1;
-	for(Produs p : this.prod) {
-		contor++;
-	}
-	Produs p = new Produs(contor, nume, cat, stoc);
+ public ResponseEntity create(@RequestBody Produs p) {
 	prod.add(p);
 	
-    return this.prod;
+    return new ResponseEntity<Produs>(p, new HttpHeaders(), HttpStatus.OK);
   }
 
   @RequestMapping(value="/produs/{id}", method = RequestMethod.GET)

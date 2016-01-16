@@ -4,7 +4,7 @@ public class Oras {
 	 
 		private  long id;
 	    private String nume,judet;
-	    private long locuitori;
+	    private int locuitori;
 		public Oras(){}
 		public Oras(long id, String nume, String judet, int loc) {
 	        this.id = id;

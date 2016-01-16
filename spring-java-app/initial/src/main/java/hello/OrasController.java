@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.ArrayList;
-
 
 @RestController
 public class OrasController {
@@ -32,10 +32,10 @@ public class OrasController {
   }
 
 @RequestMapping(value="/oras/{nume}/{judet}/{loc}", method = RequestMethod.POST)
-  public ResponseEntity create(@RequestBody Persoana p) {
+  public ResponseEntity create(@RequestBody Oras o) {
 	oras.add(o);
 	
-    return this.oras;
+    return new ResponseEntity<Oras>(o, new HttpHeaders(), HttpStatus.OK);
   }
 
   @RequestMapping(value="/oras/{id}", method = RequestMethod.GET)
